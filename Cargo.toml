@@ -3,5 +3,7 @@
 members = [
     "host",
     "filesys",
-    "reqparser"
+    "reqparser",
+    "response",
+    "utils"
 ]
