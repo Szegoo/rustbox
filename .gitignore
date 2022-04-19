@@ -1,2 +1,4 @@
-bitcoin.pdf
-img1.jpeg
+*.jpg
+*.jpeg
+*.pdf
+*.png
