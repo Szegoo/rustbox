@@ -1,12 +1,10 @@
-use std::net::TcpStream;
 use std::panic;
 use filesys;
-use reqparser;
 use utils;
 
-pub fn generate_response(stream: &TcpStream) -> Vec<u8> {
+pub fn generate_response(req: &utils::ReqDTO) -> Vec<u8> {
     let res_maybe = panic::catch_unwind(|| {
-        try_generate(&stream)
+        try_generate(&req)
     });
     let res = match res_maybe {
         Ok(d) => d,
@@ -17,9 +15,7 @@ pub fn generate_response(stream: &TcpStream) -> Vec<u8> {
     res
 }
 
-fn try_generate(stream: &TcpStream) -> Vec<u8> {
-    let req: utils::ReqDTO = reqparser::get_req(stream);
-
+fn try_generate(req: &utils::ReqDTO) -> Vec<u8> {
     let buff = filesys::get_file_buff(&req.path);
 
     let extension = get_file_extension(&req.path);

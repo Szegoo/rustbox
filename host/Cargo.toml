@@ -10,3 +10,5 @@ regex = "1"
 filesys = { path = "../filesys" }
 reqparser = { path = "../reqparser" }
 response = { path = "../response" }
+traits = { path = "../traits" }
+utils = { path = "../utils" }

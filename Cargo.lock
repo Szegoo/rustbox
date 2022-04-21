@@ -23,6 +23,8 @@ dependencies = [
  "regex",
  "reqparser",
  "response",
+ "traits",
+ "utils",
 ]
 
 [[package]]
@@ -52,6 +54,7 @@ checksum = "f497285884f3fcff424ffc933e56d7cbca511def0c9831a7f9b5f6153e3cc89b"
 name = "reqparser"
 version = "0.1.0"
 dependencies = [
+ "traits",
  "utils",
 ]
 
@@ -61,6 +64,13 @@ version = "0.1.0"
 dependencies = [
  "filesys",
  "reqparser",
+ "utils",
+]
+
+[[package]]
+name = "traits"
+version = "0.1.0"
+dependencies = [
  "utils",
 ]
 
