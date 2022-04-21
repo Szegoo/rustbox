@@ -2,7 +2,7 @@ use std::panic;
 use filesys;
 use utils;
 
-pub fn generate_response(req: &utils::ReqDTO) -> Vec<u8> {
+pub fn generate_response(req: &utils::Request) -> Vec<u8> {
     let res_maybe = panic::catch_unwind(|| {
         try_generate(&req)
     });
@@ -15,7 +15,7 @@ pub fn generate_response(req: &utils::ReqDTO) -> Vec<u8> {
     res
 }
 
-fn try_generate(req: &utils::ReqDTO) -> Vec<u8> {
+fn try_generate(req: &utils::Request) -> Vec<u8> {
     let buff = filesys::get_file_buff(&req.path);
 
     let extension = get_file_extension(&req.path);

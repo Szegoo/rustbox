@@ -24,12 +24,12 @@ impl Reqparser {
 
 impl traits::Reqparser for Reqparser{
     type Stream = TcpStream;
-    
-    fn get_req(stream: &Self::Stream) -> utils::ReqDTO {
+
+    fn get_req(stream: &Self::Stream) -> utils::Request {
         let req_buff = Self::get_req_buff(stream);
         let path = Self::get_url_path(&req_buff);
         
-        utils::ReqDTO {
+        utils::Request {
             req: req_buff,
             path,
         }

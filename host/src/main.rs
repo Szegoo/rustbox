@@ -17,7 +17,7 @@ fn main() {
 }
 
 fn handle_connection<Reqparser: traits::Reqparser<Stream = Stream>>(mut stream: TcpStream) {
-    let req: utils::ReqDTO = Reqparser::get_req(&stream);
+    let req: utils::Request = Reqparser::get_req(&stream);
     let response = response::generate_response(&req);
     
     stream.write(&response);
