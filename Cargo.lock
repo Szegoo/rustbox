@@ -22,7 +22,7 @@ dependencies = [
  "filesys",
  "regex",
  "reqparser",
- "response",
+ "responder",
  "traits",
  "utils",
 ]
@@ -59,11 +59,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "response"
+name = "responder"
 version = "0.1.0"
 dependencies = [
  "filesys",
  "reqparser",
+ "traits",
  "utils",
 ]
 

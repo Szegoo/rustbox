@@ -1,5 +1,5 @@
 [package]
-name = "response"
+name = "responder"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,3 +9,4 @@ edition = "2021"
 filesys = { path = "../filesys" }
 reqparser = { path = "../reqparser" }
 utils = { path = "../utils" }
+traits = { path = "../traits" }

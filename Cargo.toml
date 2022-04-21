@@ -4,7 +4,7 @@ members = [
     "host",
     "filesys",
     "reqparser",
-    "response",
+    "responder",
     "utils",
     "traits"
 ]

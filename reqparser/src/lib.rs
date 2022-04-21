@@ -5,6 +5,20 @@ use traits;
 
 pub struct Reqparser;
 
+impl traits::Reqparser for Reqparser{
+    type Stream = TcpStream;
+
+    fn get_req(stream: &Self::Stream) -> utils::Request {
+        let req_buff = Self::get_req_buff(stream);
+        let path = Self::get_url_path(&req_buff);
+        
+        utils::Request {
+            req: req_buff,
+            path,
+        }
+    }
+}
+
 impl Reqparser {
      fn get_req_buff(mut stream: &TcpStream) -> String {
         let mut buffer = [0; 1024];
@@ -19,19 +33,5 @@ impl Reqparser {
         let slash2_indx = new_req.find("/").unwrap();
         let path: String = new_req.chars().take(slash2_indx - slash_indx).collect();
         path
-    }
-}
-
-impl traits::Reqparser for Reqparser{
-    type Stream = TcpStream;
-
-    fn get_req(stream: &Self::Stream) -> utils::Request {
-        let req_buff = Self::get_req_buff(stream);
-        let path = Self::get_url_path(&req_buff);
-        
-        utils::Request {
-            req: req_buff,
-            path,
-        }
     }
 }

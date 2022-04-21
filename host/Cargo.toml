@@ -9,6 +9,6 @@ edition = "2021"
 regex = "1"
 filesys = { path = "../filesys" }
 reqparser = { path = "../reqparser" }
-response = { path = "../response" }
+responder = { path = "../responder" }
 traits = { path = "../traits" }
 utils = { path = "../utils" }
