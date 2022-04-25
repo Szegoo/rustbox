@@ -7,8 +7,8 @@ pub struct Reqparser;
 
 impl traits::Reqparser for Reqparser{
     fn get_req(&self, stream: &TcpStream) -> utils::Request {
-        let req_buff = Self::get_req_buff(stream);
-        let path = Self::get_url_path(&req_buff);
+        let req_buff = self.get_req_buff(stream);
+        let path = self.get_url_path(&req_buff);
         
         utils::Request {
             req: req_buff,
@@ -18,14 +18,14 @@ impl traits::Reqparser for Reqparser{
 }
 
 impl Reqparser {
-     fn get_req_buff(mut stream: &TcpStream) -> String {
+     fn get_req_buff(&self, mut stream: &TcpStream) -> String {
         let mut buffer = [0; 1024];
         stream.read(&mut buffer).unwrap();
 
         format!("{:?}", String::from_utf8_lossy(&buffer[..]))
     }
 
-    fn get_url_path(req: &str) -> String {
+    fn get_url_path(&self, req: &str) -> String {
         let slash_indx = req.find("/").unwrap();
         let new_req: String = req.chars().skip(slash_indx+1).collect();
         let slash2_indx = new_req.find("/").unwrap();

@@ -2,7 +2,7 @@ mod factory;
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
-use utils;
+use utils::*;
 use traits::*;
 use factory::*;
 
@@ -23,7 +23,7 @@ fn handle_connection(mut stream: TcpStream, factory: &Factory) {
     let responder = factory.make_responder();
     let fs = factory.make_filesys();
 
-    let req: utils::Request = parser.get_req(&stream);
+    let req: Request = parser.get_req(&stream);
     if req.path == "/add" {
         return
     }
