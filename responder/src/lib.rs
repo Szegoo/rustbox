@@ -1,17 +1,17 @@
 use std::panic;
 use filesys;
 use utils;
-use traits;
+use traits::FileSys;
 
 pub struct Responder;
 
 impl traits::Responder for Responder {
-    fn generate_post_response(req: &utils::Request) -> Vec<u8> {
+    fn generate_post_response(&self, req: &utils::Request) -> Vec<u8> {
         //TODO currentnly this just returns the headers <- fix that
         Self::try_generate_post()
     }
 
-    fn generate_get_response(req: &utils::Request) -> Vec<u8> {
+    fn generate_get_response(&self, req: &utils::Request) -> Vec<u8> {
         let res_maybe = panic::catch_unwind(|| {
             Self::try_generate_get(&req)
         });
@@ -33,7 +33,8 @@ impl Responder {
     }
 
     fn try_generate_get(req: &utils::Request) -> Vec<u8> {
-        let buff = filesys::get_file_buff(&req.path);
+        let fs = filesys::FileSys {};
+        let buff = fs.get_file_buff(&req.path);
 
         let extension = Self::get_file_extension(&req.path);
         let headers = Self::get_headers(extension);

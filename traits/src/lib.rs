@@ -1,10 +1,15 @@
-pub trait Reqparser {
-    type Stream; 
+use std::net::TcpStream;
 
-    fn get_req(stream: &Self::Stream) -> utils::Request;
+pub trait Reqparser {
+    fn get_req(&self, stream: &TcpStream) -> utils::Request;
 }
 
 pub trait Responder {
-    fn generate_post_response(req: &utils::Request) -> Vec<u8>;
-    fn generate_get_response(req: &utils::Request) -> Vec<u8>;
+    fn generate_post_response(&self, req: &utils::Request) -> Vec<u8>;
+    fn generate_get_response(&self, req: &utils::Request) -> Vec<u8>;
+}
+
+pub trait FileSys {
+    fn get_file_buff(&self, fname: &String) -> Vec<u8>;
+    fn save_file(&self, fname: &String);
 }

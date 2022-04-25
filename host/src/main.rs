@@ -1,29 +1,33 @@
+mod factory;
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
-use responder;
 use utils;
-
-pub type Stream = TcpStream;
-
-pub type Reqparser = reqparser::Reqparser;
-pub type Responder = responder::Responder;
+use traits::*;
+use factory::*;
 
 fn main() {
     let host = TcpListener::bind("192.168.1.11:7878").unwrap();
 
+    let factory = Factory {};
+
     for stream in host.incoming() {
         let stream = stream.unwrap();
-        handle_connection::<Reqparser, Responder>(stream);
+
+        handle_connection(stream, &factory);
     }
 }
 
-fn handle_connection<Reqparser: traits::Reqparser<Stream = Stream>, Responder: traits::Responder>(mut stream: TcpStream) {
-    let req: utils::Request = Reqparser::get_req(&stream);
+fn handle_connection(mut stream: TcpStream, factory: &Factory) {
+    let parser = factory.make_parser();
+    let responder = factory.make_responder();
+    let filesys = factory.make_filesys();
+
+    let req: utils::Request = parser.get_req(&stream);
     if req.path == "/add" {
         return
     }
-    let response = Responder::generate_get_response(&req);
+    let response = responder.generate_get_response(&req);
     
     stream.write(&response).unwrap();
     stream.flush().unwrap();

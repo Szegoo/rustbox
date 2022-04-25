@@ -6,5 +6,5 @@ members = [
     "reqparser",
     "responder",
     "utils",
-    "traits"
+    "traits",
 ]
