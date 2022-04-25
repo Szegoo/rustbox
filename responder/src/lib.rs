@@ -1,27 +1,17 @@
 use std::panic;
-use filesys;
-use utils;
-use traits::FileSys;
+use utils::*;
+use traits::*;
 
 pub struct Responder;
 
 impl traits::Responder for Responder {
-    fn generate_post_response(&self, req: &utils::Request) -> Vec<u8> {
+    fn generate_post_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8> {
         //TODO currentnly this just returns the headers <- fix that
         Self::try_generate_post()
     }
 
-    fn generate_get_response(&self, req: &utils::Request) -> Vec<u8> {
-        let res_maybe = panic::catch_unwind(|| {
-            Self::try_generate_get(&req)
-        });
-        let res = match res_maybe {
-            Ok(d) => d,
-            Err(_) => Self::get_err_response().join("\r\n")
-            .to_string()
-            .into_bytes()
-        }; 
-        res
+    fn generate_get_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8> {
+        Self::try_generate_get(&req, fs)
     }
 }
 
@@ -32,10 +22,17 @@ impl Responder {
             .into_bytes()
     }
 
-    fn try_generate_get(req: &utils::Request) -> Vec<u8> {
-        let fs = filesys::FileSys {};
+    fn try_generate_get<T: FileSys>(req: &Request, fs: &T) -> Vec<u8> {
         let buff = fs.get_file_buff(&req.path);
+        let res = match buff {
+            Ok(buff) => Self::get_res_with_buff(req, &buff),
+            Err(_) => Self::get_err_res()
+        };
 
+        res
+    }
+
+    fn get_res_with_buff(req: &Request, buff: &Vec<u8>) -> Vec<u8> {
         let extension = Self::get_file_extension(&req.path);
         let headers = Self::get_headers(extension);
 
@@ -44,6 +41,12 @@ impl Responder {
             .into_bytes();
         response.extend(buff);
         response
+    }
+
+    fn get_err_res() -> Vec<u8> {
+        Self::get_err_response().join("\r\n")
+           .to_string()
+           .into_bytes()
     }
 
     fn get_file_extension(path: &String) -> String {

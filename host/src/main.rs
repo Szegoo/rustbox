@@ -21,13 +21,13 @@ fn main() {
 fn handle_connection(mut stream: TcpStream, factory: &Factory) {
     let parser = factory.make_parser();
     let responder = factory.make_responder();
-    let filesys = factory.make_filesys();
+    let fs = factory.make_filesys();
 
     let req: utils::Request = parser.get_req(&stream);
     if req.path == "/add" {
         return
     }
-    let response = responder.generate_get_response(&req);
+    let response = responder.generate_get_response(&req, &fs);
     
     stream.write(&response).unwrap();
     stream.flush().unwrap();
