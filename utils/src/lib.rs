@@ -1,4 +1,4 @@
 pub struct Request {
-    pub req: String,
+    pub buffer: String,
     pub path: String,
 }

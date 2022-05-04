@@ -1,8 +1,7 @@
 mod factory;
 use std::io::prelude::*;
 use std::io::BufReader;
-use std::net::TcpListener;
-use std::net::TcpStream;
+use std::net::{TcpListener, TcpStream};
 use utils::*;
 use traits::*;
 use factory::*;
@@ -22,10 +21,10 @@ fn main() {
 fn handle_connection(mut stream: TcpStream, factory: &Factory) {
     let parser = factory.make_parser();
 
-    let mut reader = BufReader::new(&stream);
-    println!("stream: {:?}", stream);
-
+    println!("New connection!");
+    
     let req: Request = parser.get_req(&stream);
+    println!("Request: {:?}", req.buffer);
 
     let response = get_response(&req, &factory);
     
