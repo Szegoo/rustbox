@@ -1,13 +1,29 @@
 mod factory;
+
 use std::io::prelude::*;
-use std::io::BufReader;
 use std::net::{TcpListener, TcpStream};
+use clap::Parser;
+
 use utils::*;
 use traits::*;
 use factory::*;
+use cli::*;
 
 fn main() {
-    let host = TcpListener::bind("localhost:7878").unwrap();
+    let args = Cli::parse();
+
+    if args.download_uri.is_some() && args.download_name.is_some() {
+        println!("Downloading...");
+    }
+    
+    if !args.host {
+        return;
+    }
+
+    let url: String = format!("localhost:{}", args.port);
+
+    let host = TcpListener::bind(url.clone()).unwrap();
+    println!("Listening on: {}", url);
 
     let factory = Factory {};
 

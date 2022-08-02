@@ -7,8 +7,11 @@ edition = "2021"
 
 [dependencies]
 regex = "1"
+clap = { version = "3.0", features = ["derive"] }
+
 filesys = { path = "../filesys" }
 reqparser = { path = "../reqparser" }
 responder = { path = "../responder" }
 traits = { path = "../traits" }
 utils = { path = "../utils" }
+cli = { path = "../cli" }
