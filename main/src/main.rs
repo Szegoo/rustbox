@@ -9,7 +9,7 @@ fn main() {
     if args.download_uri.is_some() && args.download_name.is_some() {
         println!("Downloading...");
     }
-    
+
     if args.host {
         host(args.port);
     }

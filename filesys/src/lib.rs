@@ -1,11 +1,11 @@
-use std::io::prelude::*;
 use std::fs::File;
+use std::io::prelude::*;
 use traits;
 
 pub struct FileSys;
 
 impl traits::FileSys for FileSys {
-    fn get_file_buff(&self, fname: &String) -> Result<Vec<u8>, u8> { 
+    fn get_file_buff(&self, fname: &String) -> Result<Vec<u8>, u8> {
         let mut buff = Vec::new();
         println!("Filename: {}", fname);
         if let Ok(mut file) = File::open(fname) {
@@ -16,7 +16,5 @@ impl traits::FileSys for FileSys {
         return Err(1);
     }
 
-    fn save_file(&self, fname: &String) {
-        
-    }
+    fn save_file(&self, fname: &String) {}
 }

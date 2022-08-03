@@ -1,6 +1,6 @@
 use clap::Parser;
 
-/// Back up files or start hosting them.
+/// Back up files from web or start hosting them.
 #[derive(Parser)]
 pub struct Cli {
     /// The URI of the file that the user wants to download.

@@ -1,9 +1,9 @@
 use std::io::prelude::*;
 use std::net::{TcpListener, TcpStream};
 
-use utils::*;
-use traits::*;
 use factory::Factory;
+use traits::*;
+use utils::*;
 
 pub fn host(port: u16) {
     let url = format!("localhost:{}", port);
@@ -23,12 +23,12 @@ fn handle_connection(mut stream: TcpStream, factory: &Factory) {
     let parser = factory.make_parser();
 
     println!("New connection!");
-    
+
     let req: Request = parser.get_req(&stream);
     println!("Request: {:?}", req.buffer);
 
     let response = get_response(&req, &factory);
-    
+
     stream.write(&response).unwrap();
     stream.flush().unwrap();
 }
@@ -36,6 +36,6 @@ fn handle_connection(mut stream: TcpStream, factory: &Factory) {
 fn get_response(req: &Request, factory: &Factory) -> Vec<u8> {
     let responder = factory.make_responder();
     let fs = factory.make_filesys();
-    
+
     responder.generate_get_response(&req, &fs)
 }
