@@ -1,11 +1,12 @@
 [package]
-name = "host"
+name = "main"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+regex = "1"
 clap = { version = "3.0", features = ["derive"] }
 
 filesys = { path = "../filesys" }
@@ -14,4 +15,4 @@ responder = { path = "../responder" }
 traits = { path = "../traits" }
 utils = { path = "../utils" }
 cli = { path = "../cli" }
-factory = { path = "../factory" }
+host = { path = "../host" }

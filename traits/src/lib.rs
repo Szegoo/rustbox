@@ -15,6 +15,10 @@ pub trait FileSys {
     fn save_file(&self, fname: &String);
 }
 
+pub trait Backer {
+    fn download_from(&self, uri: &String, fname: &String);
+}
+
 pub trait FactoryT {
     type Parser;
     type Responder;
