@@ -10,3 +10,4 @@ filesys = { path = "../filesys" }
 reqparser = { path = "../reqparser" }
 responder = { path = "../responder" }
 traits = { path = "../traits" }
+backer = { path = "../backer" }

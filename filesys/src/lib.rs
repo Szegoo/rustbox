@@ -1,6 +1,5 @@
 use std::fs::File;
 use std::io::prelude::*;
-use traits;
 
 pub struct FileSys;
 

@@ -22,8 +22,10 @@ pub trait FactoryT {
     type Parser;
     type Responder;
     type FileSys;
+    type Backer;
 
     fn make_parser(&self) -> Self::Parser;
     fn make_responder(&self) -> Self::Responder;
     fn make_filesys(&self) -> Self::FileSys;
+    fn make_backer(&self) -> Self::Backer;
 }

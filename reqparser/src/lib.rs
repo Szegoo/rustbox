@@ -1,7 +1,5 @@
 use std::io::prelude::*;
 use std::net::TcpStream;
-use traits;
-use utils;
 
 pub struct Reqparser;
 

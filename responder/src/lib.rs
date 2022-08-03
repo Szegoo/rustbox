@@ -11,13 +11,6 @@ impl traits::Responder for Responder {
 }
 
 impl Responder {
-    fn try_generate_post(&self) -> Vec<u8> {
-        self.get_post_headers()
-            .join("\r\n")
-            .to_string()
-            .into_bytes()
-    }
-
     fn try_generate_get<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8> {
         let buff = fs.get_file_buff(&req.path);
         let res = match buff {
@@ -71,15 +64,6 @@ impl Responder {
     fn get_err_response(&self) -> [String; 3] {
         let headers = [
             String::from("HTTP/1.1 404 Not found"),
-            String::from("Content-Type: Text/html"),
-            String::from("\r\n"),
-        ];
-        headers
-    }
-
-    fn get_post_headers(&self) -> [String; 3] {
-        let headers = [
-            String::from("HTTP/1.1 201 File saved"),
             String::from("Content-Type: Text/html"),
             String::from("\r\n"),
         ];

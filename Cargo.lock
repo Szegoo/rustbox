@@ -147,6 +147,7 @@ dependencies = [
 name = "factory"
 version = "0.1.0"
 dependencies = [
+ "backer",
  "filesys",
  "reqparser",
  "responder",
@@ -449,15 +450,13 @@ dependencies = [
 name = "main"
 version = "0.1.0"
 dependencies = [
+ "backer",
  "clap",
  "cli",
- "filesys",
+ "factory",
  "host",
  "regex",
- "reqparser",
- "responder",
  "traits",
- "utils",
 ]
 
 [[package]]
