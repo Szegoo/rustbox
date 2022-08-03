@@ -5,11 +5,6 @@ use traits::*;
 pub struct Responder;
 
 impl traits::Responder for Responder {
-    fn generate_post_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8> {
-        //TODO currentnly this just returns the headers <- fix that
-        self.try_generate_post()
-    }
-
     fn generate_get_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8> {
         self.try_generate_get(&req, fs)
     }

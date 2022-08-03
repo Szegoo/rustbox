@@ -36,8 +36,6 @@ fn handle_connection(mut stream: TcpStream, factory: &Factory) {
 fn get_response(req: &Request, factory: &Factory) -> Vec<u8> {
     let responder = factory.make_responder();
     let fs = factory.make_filesys();
-    if req.path == "add" {
-        return responder.generate_post_response(&req, &fs)
-    }
+    
     responder.generate_get_response(&req, &fs)
 }

@@ -6,7 +6,6 @@ pub trait Reqparser {
 }
 
 pub trait Responder {
-    fn generate_post_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8>;
     fn generate_get_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8>;
 }
 
