@@ -14,6 +14,4 @@ impl traits::FileSys for FileSys {
 
         return Err(1);
     }
-
-    fn save_file(&self, fname: &String) {}
 }

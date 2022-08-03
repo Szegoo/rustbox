@@ -6,12 +6,11 @@ pub trait Reqparser {
 }
 
 pub trait Responder {
-    fn generate_get_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8>;
+    fn generate_response<T: FileSys>(&self, req: &Request, fs: &T) -> Vec<u8>;
 }
 
 pub trait FileSys {
     fn get_file_buff(&self, fname: &String) -> Result<Vec<u8>, u8>;
-    fn save_file(&self, fname: &String);
 }
 
 pub trait Backer {

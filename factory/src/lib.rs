@@ -1,3 +1,5 @@
+//! This is like a config file for the project. All of the actual types are defined in here. 
+
 use traits::FactoryT;
 
 type Reqparser = reqparser::Reqparser;
