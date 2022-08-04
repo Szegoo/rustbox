@@ -1,9 +1,9 @@
 use clap::Parser;
 
 use cli::Cli;
-use host::host;
 use factory::Factory;
-use traits::{FactoryT, Backer};
+use host::host;
+use traits::{Backer, FactoryT};
 
 /// The main function of the rustbox project.
 fn main() {
@@ -22,7 +22,7 @@ fn main() {
 
     // Host if the `host` flag is specified, otherwise the program will just finish running.
     // Important NOTE: This needs to be at the end of the main function or run concurrently because
-    // the function won't finish on its own because it will always await for new requests. 
+    // the function won't finish on its own because it will always await for new requests.
     if args.host {
         host(args.port);
     }

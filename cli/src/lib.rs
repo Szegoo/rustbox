@@ -7,8 +7,8 @@ pub struct Cli {
     #[clap(short = 'u', long = "download-uri")]
     pub download_uri: Option<String>,
 
-    /// The name of the newly downloaded file. This is up to the user to decide. Note that this will
-    /// be used for getting the file.
+    /// The name of the newly downloaded file(without the extension specified). This is up to the
+    /// user to decide. Note that this will be used for getting the file.
     #[clap(short = 'n', long = "download-name")]
     pub download_name: Option<String>,
 
